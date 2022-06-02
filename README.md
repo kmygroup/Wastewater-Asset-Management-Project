@@ -1,2 +1,2 @@
 # Wastewater-Asset-Management-Project
-wastewater asset management project2
+This project is a collaborative research development project focused on improving asset management methods in the wastewater industry. This project uses machine learning to form correlations and determine several key factors to assess the performance of the pipelines in the wastewater distribution network. After developing the machine learning model, an user friendly interface was developed to allow the industry to use the machine learning model without the need of coding experience. 
