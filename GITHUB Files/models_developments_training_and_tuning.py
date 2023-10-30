@@ -17,7 +17,7 @@ from sklearn.preprocessing import StandardScaler
 from xgboost import XGBClassifier
 from hyperopt import hp, fmin, tpe, Trials, STATUS_OK, space_eval
 #%% import data
-url = 'C:/Users/aboagy26/OneDrive - Rowan University/Emmanuel_Apau_Aboagye/Wastewater Treatment/ACUA Manuscript/Response to reviewer comments/Final_DF_Emmanuel.xlsx'
+url = 'Final_DF.xlsx'
 data_df = pd.read_excel(url) 
 
 #%% Features and Label Data
@@ -188,8 +188,8 @@ print('best hyperparameters: ', space_eval(space,best))
 
 # splitting_risk_prob_df = pd.DataFrame({'training': splitting, 'risk_prob_acc_rf':risk_prob_acc_rf, 'risk_prob_acc_xg':risk_prob_acc_xg}) 
 #%% Refiting model with optimal hyperparameters
-risk_prob_results_rf_tuned = make_model_rf(data_df, risk_prob_features, risk_prob_label, train_size_=0.7,Tree_num=310, max_depth_=3) # 93.36441336441337
-fail_imp_results_rf_tuned = make_model_rf(data_df, fail_imp_features, fail_imp_label, train_size_=0.7, Tree_num=110, max_depth_=19) # 91.31313131313131
+risk_prob_results_rf_tuned = make_model_rf(data_df, risk_prob_features, risk_prob_label, train_size_=0.7,Tree_num=310, max_depth_=3) 
+fail_imp_results_rf_tuned = make_model_rf(data_df, fail_imp_features, fail_imp_label, train_size_=0.7, Tree_num=110, max_depth_=19) 
 
 risk_prob_results_xgb_tuned = make_model_xgb(data_df, risk_prob_features, risk_prob_label, train_size_=0.7, Tree_num=10, max_depth_=1) 
 fail_imp_results_xgb_tuned = make_model_xgb(data_df, fail_imp_features, fail_imp_label, train_size_=0.7, Tree_num=110, max_depth_=4) 
@@ -276,7 +276,7 @@ data_df_results['Failure_Impact_Actual'] = failure_impact_actual.values
 data_df_results['Failure_Impact_Predicted'] = failure_impact_prediction
 data_df_results['Risk_Factor_Actual'] = risk_factor_actual.values
 data_df_results['Risk_Factor_Predicted'] = risk_factor_prediction
-data_df_results.to_excel('C:/Users/aboagy26/OneDrive - Rowan University/Emmanuel_Apau_Aboagye/Wastewater Treatment/ACUA Manuscript/Response to reviewer comments/Results.xlsx')
+data_df_results.to_excel('Results.xlsx')
 
 #%%
 
