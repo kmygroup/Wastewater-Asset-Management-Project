@@ -10,6 +10,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
 from sklearn import metrics
 from sklearn.metrics import confusion_matrix
@@ -44,7 +45,7 @@ def diagonal_heatmap(m):
 
 
 def make_model(data,factors=[""],dependentvariable=[""], labels=[""],
-               Random_State=20,training=0.68,Tree_num=27):
+               Random_State=20,training=0.70,Tree_num=27, max_depth_=6):
     Independent=data.loc[:,factors]
 
     Dependent=data[dependentvariable].values
@@ -57,11 +58,14 @@ def make_model(data,factors=[""],dependentvariable=[""], labels=[""],
                                                         train_size=training, 
                                                         random_state=Random_State)
     
-    
+    scalar = StandardScaler()
+    X_train = scalar.fit_transform(X_train)
+    X_test  = scalar.transform(X_test)
+
     taining_length="the length of the training set is: %d"%len(X_train)
     testing_length="the length of the testing set is: %d"%len(X_test)
     
-    model = RandomForestClassifier(n_estimators=Tree_num, random_state=Random_State)
+    model = RandomForestClassifier(n_estimators=Tree_num, random_state=Random_State, max_depth=max_depth_)
     model.fit(X_train, Y_train)
     prediction = model.predict(Independent) 
     Accuracy=metrics.accuracy_score(Dependent, prediction)
