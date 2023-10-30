@@ -16,6 +16,7 @@ import numpy as np
 import pandas as pd
 import time
 from datetime import date
+from sklearn.preprocessing import StandardScaler
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg)
 import os
 from sqlalchemy import create_engine
@@ -164,7 +165,7 @@ def make_pipe_db():
     dependentvariable='True_Risk_Probability'
     RP_model=make_model(pipe_DB,factors=factors,dependentvariable=dependentvariable,labels=factor_labels)
     all_RP_data=Pipe_DB_All.loc[:,factors]
-    RP_prediction=RP_model.model.predict(all_RP_data)
+    RP_prediction=RP_model.model.predict(StandardScaler().fit_transform(all_RP_data))
     
     
     
@@ -174,7 +175,7 @@ def make_pipe_db():
     dependentvariable='True_Failure_Impact'
     FI_model=make_model(pipe_DB,factors=fi_factors,dependentvariable=dependentvariable,labels=fi_factor_labels)
     all_FI_data=Pipe_DB_All.loc[:,fi_factors]
-    FI_prediction=FI_model.model.predict(all_FI_data)
+    FI_prediction=FI_model.model.predict(StandardScaler().fit_transform(all_FI_data))
     
     OPMN_vals=RP_prediction*FI_prediction
     
@@ -1391,8 +1392,8 @@ def reset_model():
         RP_model=make_model(pipe_DB,factors=RP_factors,dependentvariable=RP_dependentvariable,labels=factor_labels)
         FI_model=make_model(pipe_DB,factors=fi_factors,dependentvariable=fi_dependentvariable,labels=fi_factor_labels)  
         
-        RP_prediction=RP_model.model.predict(all_RP_data)
-        FI_prediction=FI_model.model.predict(all_FI_data)
+        RP_prediction=RP_model.model.predict(StandardScaler().fit_transform(all_RP_data))
+        FI_prediction=FI_model.model.predict(StandardScaler().fit_transform(all_FI_data))
         
         OPMN_vals=RP_prediction*FI_prediction
         
