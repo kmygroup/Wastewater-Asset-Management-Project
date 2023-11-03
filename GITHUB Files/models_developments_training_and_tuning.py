@@ -18,7 +18,7 @@ from xgboost import XGBClassifier
 from hyperopt import hp, fmin, tpe, Trials, STATUS_OK, space_eval
 # from sklearn.preprocessing import label_binarize
 #%% import data
-url = 'C:/Users/aboag/OneDrive - Rowan University/Emmanuel_Apau_Aboagye/Wastewater Treatment/ACUA Manuscript/Response to reviewer comments/Final_DF_Emmanuel.xlsx'
+url = 'Final_DF_Emmanuel.xlsx'
 data_df = pd.read_excel(url) 
 
 #%% Features and Label Data
